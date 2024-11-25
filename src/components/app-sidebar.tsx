@@ -30,9 +30,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <div className="flex flex-col px-4 gap-4 pb-4">
           <Button>Get a demo</Button>
-          <Button className="rounded-full" variant={"outline"}>
-            Login
-          </Button>
+          <Link to={"/login"} className="w-full">
+            <Button className="rounded-full w-full" variant={"outline"}>
+              Login
+            </Button>
+          </Link>
         </div>
       </SidebarFooter>
     </Sidebar>
