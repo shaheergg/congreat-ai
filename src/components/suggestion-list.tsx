@@ -1,4 +1,5 @@
 import CongreatIcon from "@/assets/congreat-icon.png";
+import useChatStateStore from "@/store/chatState";
 
 type SuggestionType = {
   id: number;
@@ -10,11 +11,16 @@ type SuggestionListPropsType = {
 };
 
 const SuggestionsList = ({ suggestions }: SuggestionListPropsType) => {
+  const setChatState = useChatStateStore(
+    (state: unknown) =>
+      (state as { setChatState: (chatState: string) => void }).setChatState
+  );
   return (
     <div className="px-4 space-y-2 h-full flex flex-col justify-end">
       {suggestions.map((suggestion) => {
         return (
           <button
+            onClick={() => setChatState(suggestion.name)}
             key={suggestion.id}
             style={{
               boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",

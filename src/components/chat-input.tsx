@@ -1,12 +1,17 @@
 import { Button } from "@/components/ui/button";
+import useChatStateStore from "@/store/chatState";
 import { ExternalLink, Search } from "lucide-react";
 
 const ChatInput = () => {
+  const chatState = useChatStateStore(
+    (state: unknown) => (state as { chatState: string }).chatState
+  );
   return (
-    <div className="p-4 space-y-4">
+    <div className="py-4 bg-white space-y-4">
       <div className="relative">
         <input
           type="text"
+          value={chatState === "none" ? "" : chatState}
           className="w-full bg-gray-100 border border-gray-300 rounded-full px-4 outline-none focus:outline-primary py-2"
           placeholder="Ask anything about congreat!"
         />

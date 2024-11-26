@@ -1,7 +1,9 @@
 import ChatInput from "@/components/chat-input";
 import HeroSection from "@/components/hero-section";
-import SuggestionsList from "@/components/suggestion-list";
 import AppLayout from "@/layouts/app-layout";
+import useChatStateStore from "@/store/chatState";
+import ChatWindow from "@/components/chat-window";
+
 const Chat = () => {
   const suggestions = [
     { id: 1, name: "About Congreat" },
@@ -11,17 +13,20 @@ const Chat = () => {
     { id: 5, name: "Contact" },
     { id: 5, name: "Terms Of Use" },
   ];
+  const chatState = useChatStateStore(
+    (state: unknown) => (state as { chatState: string }).chatState
+  );
   return (
     <div>
       <AppLayout>
-        <div className="flex flex-1 flex-col gap-4 py-4 md:px-20 px-8">
+        <div className="flex flex-1 flex-col gap-4 md:px-20 py-4 px-8">
           <HeroSection />
           <div className="flex flex-col bg-white shadow px-4 md:px-20 border rounded-xl">
-            <div className="h-[65vh] overflow-auto py-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 flex flex-col">
-              <SuggestionsList suggestions={suggestions} />
-            </div>
-            <div className="sticky bottom-0 bg-white">
-              <ChatInput />
+            <div className="w-full max-w-3xl mx-auto">
+              <ChatWindow suggestions={suggestions} chatState={chatState} />
+              <div className="sticky bottom-0 ">
+                <ChatInput />
+              </div>
             </div>
           </div>
         </div>
