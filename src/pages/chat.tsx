@@ -24,7 +24,7 @@ const Chat = () => {
           <div className="flex flex-col bg-white shadow px-4 md:px-20 border rounded-xl">
             <div className="w-full max-w-3xl mx-auto">
               <ChatWindow suggestions={suggestions} chatState={chatState} />
-              <div className="sticky bottom-0 ">
+              <div className="sticky bottom-0">
                 <ChatInput />
               </div>
             </div>
