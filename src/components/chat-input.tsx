@@ -1,6 +1,6 @@
 import useChatStateStore from "@/store/chatState";
 import { Button } from "@/components/ui/button";
-import { Search, X } from "lucide-react"; // Assuming you're using icons
+import { Search } from "lucide-react";
 import { ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
 
