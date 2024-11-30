@@ -6,25 +6,39 @@ import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useNavigate } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
+import useChatStateStore from "@/store/chatState";
+
 const LoginPage = () => {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const goBack = () => {
     navigate(-1);
   };
+  const setChatState = useChatStateStore(
+    (state: unknown) =>
+      (state as { setChatState: (chatState: string) => void }).setChatState
+  );
+  const goToContact = () => {
+    setChatState("Contact");
+    navigate("/");
+  };
   return (
     <div className="min-h-screen flex items-center">
-      <div className="flex-1 h-full py-12 px-8">
+      <div className="flex-1 h-full py-4 px-8">
         <div className="p-4 flex items-center">
-          <Button
-            onClick={goBack}
-            variant={"outline"}
-            className="text-primary rounded-full"
-          >
-            <ChevronLeft size={24} />
-            Back
-          </Button>
+          {!isMobile && (
+            <Button
+              onClick={goBack}
+              variant={"outline"}
+              className="text-primary rounded-full"
+            >
+              <ChevronLeft size={24} />
+              Back
+            </Button>
+          )}
         </div>
-        <div className="flex items-center flex-col justify-center pt-4 space-y-12">
+        <div className="flex items-center flex-col justify-center pt-4 space-y-8">
           <div>
             <Link to={"/"}>
               <img className="h-8" src={CongreatLogo} alt="Congreat Logo" />
@@ -40,6 +54,17 @@ const LoginPage = () => {
               <Button type="submit" className="w-full">
                 Login
               </Button>
+              {isMobile && (
+                <Button
+                  onClick={goBack}
+                  variant={"outline"}
+                  type="button"
+                  className="w-full text-primary rounded-full"
+                >
+                  <ChevronLeft size={24} />
+                  Back
+                </Button>
+              )}
             </form>
             <Separator className="my-4"></Separator>
             <div className="w-full space-y-2">
@@ -109,12 +134,13 @@ const LoginPage = () => {
             <div>
               <p className="text-[#92909599]">
                 Not our client?{" "}
-                <a
+                <Button
+                  onClick={goToContact}
+                  variant={"link"}
                   className="px-1 font-semibold text-primary underline"
-                  href="#"
                 >
                   Contact Us
-                </a>
+                </Button>
               </p>
             </div>
           </div>

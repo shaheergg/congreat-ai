@@ -12,7 +12,7 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
       <AppSidebar />
       <SidebarInset className="bg-[#FAFAFA]">
         {isMobile && (
-          <header className="px-10 py-4 flex items-center justify-between">
+          <header className="px-10 py-2 flex items-center justify-between">
             <Link to={"/"}>
               <img
                 className="h-8"

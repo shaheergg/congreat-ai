@@ -1,6 +1,6 @@
 const TeamMember = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-6 px-4 gap-4">
       <div className="h-24 w-24">
         <img
           className="h-full w-full object-cover rounded-full"

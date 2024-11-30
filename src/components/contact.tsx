@@ -42,6 +42,10 @@ const Contact = () => {
             placeholder="Full Name"
           />
           <Input required type="text" placeholder="Email" />
+          <p className="text-[14px] text-[#92909599]">
+            By submitting you agree to receive marketing communications from
+            Congreat. Check our Privacy Policy.
+          </p>
           <Button className="w-full" type="submit">
             Submit
           </Button>

@@ -22,7 +22,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ sample }) => {
   };
 
   return (
-    <div className="relative w-full bg-white border">
+    <div className="relative w-full bg-white">
       <video
         ref={videoRef}
         className="w-full h-[40vh] object-cover rounded" // Adjust the height as needed
