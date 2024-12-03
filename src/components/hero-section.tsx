@@ -9,7 +9,7 @@ const HeroSection = () => {
       (state as { setChatState: (chatState: string) => void }).setChatState
   );
   return (
-    <div className="px-3 space-y-1">
+    <div className="px-3 space-y-1 py-4">
       <h2 className="text-[24px]">
         <span className="font-semibold">Smarter</span> and{" "}
         <span className="font-semibold">Faster</span> Decisions!{" "}

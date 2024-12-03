@@ -1,14 +1,14 @@
 const TeamMember = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-6 px-4 gap-4">
-      <div className="h-24 w-24">
+    <div className="flex items-center gap-4 p-2">
+      <div className="h-16 w-16">
         <img
           className="h-full w-full object-cover rounded-full"
           src="https://github.com/shadcn.png"
           alt="Profile picture of Amitai Eliram"
         />
       </div>
-      <div className="md:col-span-5 space-y-4">
+      <div className="flex-1 px-2 space-y-4">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="font-bold">Amitai Eliram</h2>
@@ -33,12 +33,6 @@ const TeamMember = () => {
               </svg>
             </a>
           </div>
-        </div>
-        <div>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-            eaque quod officia similique laboriosam. Vero, maiores!
-          </p>
         </div>
       </div>
     </div>

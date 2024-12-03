@@ -9,7 +9,12 @@ const ChatInput = () => {
     (state: unknown) => (state as { message: string }).message
   );
   const [previousValue, setPreviousValue] = useState(message);
-
+  const [show, setShow] = useState<boolean>(false);
+  const options = [
+    "Display Details from Apartment Plan 5",
+    "My Project Status",
+    "How many tasks are open today?",
+  ];
   useEffect(() => {
     setPreviousValue(message);
   }, [message]);
@@ -24,6 +29,11 @@ const ChatInput = () => {
   );
   const handelInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
+    if (e.target.value.endsWith("/")) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
     if (newValue.length < previousValue.length) {
       setChatState("none");
     }
@@ -38,7 +48,23 @@ const ChatInput = () => {
     else setChatState(message);
   };
   return (
-    <div className="py-4 bg-white space-y-4">
+    <div className="py-4 relative bg-white space-y-4">
+      {show && (
+        <div className="p-2 absolute shadow-md space-y-2 w-full z-[99999] -top-32 rounded-[10px] border border-[#92909526] bg-[#FAFAFA]">
+          {options.map((option) => (
+            <button
+              key={option}
+              onClick={() => {
+                setMessage(option);
+                setShow(false);
+              }}
+              className="px-4 py-2 border border-[#92909526] text-[#929095CC] w-full text-sm bg-white text-left cursor-pointer rounded-md"
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+      )}
       <div className="relative">
         <input
           onKeyUp={(e) => {

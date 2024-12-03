@@ -7,13 +7,16 @@ export const useTypingEffect = (
 ) => {
   const [currentPosition, setCurrentPosition] = useState(0);
   const items = isTypeByLetter ? text.split("") : text.split(" ");
-
+  const [done, setDone] = useState(false);
   useEffect(() => {
     setCurrentPosition(0);
   }, [text]);
 
   useEffect(() => {
-    if (currentPosition >= items.length) return;
+    if (currentPosition >= items.length) {
+      setDone(true);
+      return;
+    }
 
     const intervalId = setInterval(() => {
       setCurrentPosition((prevPosition) => prevPosition + 1);
@@ -24,5 +27,8 @@ export const useTypingEffect = (
     };
   }, [currentPosition, items, duration]);
 
-  return items.slice(0, currentPosition).join(isTypeByLetter ? "" : " ");
+  return {
+    text: items.slice(0, currentPosition).join(isTypeByLetter ? "" : " "),
+    done: done,
+  };
 };

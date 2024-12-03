@@ -3,6 +3,7 @@ import HeroSection from "@/components/hero-section";
 import AppLayout from "@/layouts/app-layout";
 import useChatStateStore from "@/store/chatState";
 import ChatWindow from "@/components/chat-window";
+import SlashInput from "@/components/slash-input";
 
 const Chat = () => {
   const suggestions = [
@@ -17,9 +18,10 @@ const Chat = () => {
   return (
     <div>
       <AppLayout>
-        <div className="flex flex-1 flex-col gap-4 md:px-20 py-4 px-4">
-          <HeroSection />
-          <div className="flex flex-col bg-white shadow px-4 md:px-20 border rounded-xl">
+        {/* <SlashInput /> */}
+        <div className="flex flex-1 flex-col gap-4 md:px-20">
+          {chatState === "none" && <HeroSection />}
+          <div className="flex flex-col bg-white px-4 md:px-20 rounded-xl">
             <div className="w-full max-w-3xl mx-auto">
               <ChatWindow suggestions={suggestions} chatState={chatState} />
               <div className="sticky bottom-0">

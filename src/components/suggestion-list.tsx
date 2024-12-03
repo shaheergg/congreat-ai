@@ -1,6 +1,7 @@
 import CongreatIcon from "@/assets/congreat-icon.png";
 import { useIsMobile } from "@/hooks/use-mobile";
 import useChatStateStore from "@/store/chatState";
+import { motion } from "framer-motion";
 
 type SuggestionType = {
   id: number;
@@ -16,6 +17,22 @@ const SuggestionsList = ({ suggestions }: SuggestionListPropsType) => {
     (state: unknown) =>
       (state as { setChatState: (chatState: string) => void }).setChatState
   );
+
+  const containerVariants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2, // Delay for stacking animation
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 }, // Start from below
+    visible: { opacity: 1, y: 0 }, // Move to its position
+  };
+
   const setMessage = useChatStateStore(
     (state: unknown) =>
       (state as { setMessage: (message: string) => void }).setMessage
@@ -34,21 +51,28 @@ const SuggestionsList = ({ suggestions }: SuggestionListPropsType) => {
             <span className="font-semibold">Cockpit</span>!
           </p>
         )}
-        {suggestions.map((suggestion) => {
-          return (
-            <button
-              onClick={() => handleSubmit(suggestion)}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-col-reverse space-y-2"
+        >
+          {[...suggestions].reverse().map((suggestion) => (
+            <motion.button
+              variants={itemVariants}
               key={suggestion.id}
-              style={{
-                boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-              }}
-              className="border border-[#D4D4D8] max-w-fit px-3 py-1 rounded-full text-[#929095CC] text-[14px] flex items-center justify-between"
+              onClick={() => handleSubmit(suggestion)}
+              className="border mt-2 border-[#D4D4D8] max-w-fit px-3 py-1 rounded-[5px] text-[#929095CC] text-[14px] flex items-center justify-between"
             >
-              <img src={CongreatIcon} alt="congreat icon" />
+              <img
+                src={CongreatIcon}
+                className="mb-1 mr-1"
+                alt="congreat icon"
+              />
               {suggestion.name}
-            </button>
-          );
-        })}
+            </motion.button>
+          ))}
+        </motion.div>
       </div>
     </>
   );

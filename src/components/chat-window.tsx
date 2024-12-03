@@ -7,6 +7,7 @@ import { Image } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ErrorMessage from "@/components/error-message";
 import SolutionFor from "@/components/solution-for";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type SuggestionType = {
   id: number;
@@ -21,7 +22,11 @@ type ChatWindowPropsType = {
 const ChatWindow = ({ chatState, suggestions }: ChatWindowPropsType) => {
   const isMobile = useIsMobile();
   return (
-    <div className="md:h-[65vh] h-[40vh] overflow-auto py-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 flex flex-col">
+    <ScrollArea
+      className={`${
+        chatState === "none" ? "md:h-[65vh] h-[40vh]" : "h-screen"
+      } p-4 flex flex-col`}
+    >
       {chatState === "Contact" ? (
         <Contact />
       ) : chatState === "Terms Of Use" ? (
@@ -36,7 +41,10 @@ const ChatWindow = ({ chatState, suggestions }: ChatWindowPropsType) => {
         <>
           {!isMobile && (
             <div className="space-y-4 py-4">
-              <span className="text-[#92909599] text-[18px]">Trust By</span>
+              <marquee behavior="" direction="right">
+                {" "}
+                <span className="text-[#92909599] text-[18px]">Connectors</span>
+              </marquee>
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="text-[#92909599]">
                   <Image size={48} />
@@ -61,7 +69,7 @@ const ChatWindow = ({ chatState, suggestions }: ChatWindowPropsType) => {
       ) : (
         <ErrorMessage />
       )}
-    </div>
+    </ScrollArea>
   );
 };
 
